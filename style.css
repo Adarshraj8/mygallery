@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#wrapper{
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.container{
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /*issai jo margin left and right side mai lgya jata hai taki apka content center mai aajaye  */
+    padding: 20px;
+}
+.container h1{
+     margin: 20px 0; /*20px top and bottom margin 0px left and right margin  */
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 3rem;
+}
+.gallery{
+    display: flex;  /*toh iska default axis ki value horizontal ho jayeegi */
+    flex-wrap:  wrap;/* flex wrap ko wrap nhi karunga toh sarai imgae single row mai hi aajayengi,toh flex wrap krnai sai agar wo same row mai place nhi ho skai to wo nichai aa jayengai */
+    justify-content: space-between;
+}
+
+.card{
+   width: 32%;  /* 3 image ko ek row mai lani thi isliye 32 de diya jo 100% mai sai nikalta hai */
+   position:  relative;/* agai text ya figcaption overlap karegi image kai upper  toh absolute postion hogi,absolute kai liye conditon hota hai ki nearest postion ancestor non static honichaiye toh isko relative kar diya,ek cheze observe kri thi ki ye jo image and text overlap karengi
+   text ko image kai upeer overlap karana hai toh kon si postion use karunga absolute
+   toh absolute ki condtion kya hoti hai, jha par nearest ancestor nonstatic positioned ho ,jisko overlap karana hai uska parent relative ya nonstatic mark karna parega */
+   margin-bottom: 20px;
+  border-radius: 10px;  /*this propery round corner of element outer border edges. card kai corner ko rounded karnai kai liye  */
+  overflow: hidden; /*kisi bhi direction mai ho overflow ko hide kar dena */
+}
+
+.card img{
+   width: 100%; /*image ka parent element card hai,toh jitni width card ki hogi utna width child ka hoga  */
+   filter:  grayscale(100%);/* ishsai sari image black and white hogayi */
+   box-shadow: 0 0 20px #333;  /* image hlki shadow hai to use it  */
+    height: 100%; /*image ka parent card hai,toh card ki jitni height ban rhi hai wo sari inherit ho jayengi */
+    object-fit: cover; 
+}
+
+.card:hover{
+   transform: scale(1.03);   /*hover karu toh card ki size bdi ho jaye ,toh scale kar diya usai */
+   transition: 0.5s;
+   /* box-shadow: 0 0 10px #333; box shadow kai ander bhi same blur achive kar skatai hai par kuch variation krkai*/
+    filter: drop-shadow(0 0 10px #333); /* drop shadow jsai hover karu image parr toh ek black shadow around corner dikhai */
+   /* drop shadow create shadow equals to image */
+  
+}
+.card:hover img{
+  filter: grayscale(0%); /*//sari image normal ho jayegi */
+}
+
+.card figcaption{
+    position: absolute;  /*isliye kiya kyoki figcation ko overlap karna hai image kai upar */
+    bottom: 0;
+    left: 0;
+    padding: 25px;
+    width: 100%;
+    height: 20%;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff;
+    opacity: 0;
+    border-radius: 0 0 10px 10px;
+     background: linear-gradient(0deg,rgba(0,0,0,0.5) 0%,rgba(255,255,255,0)100%);
+     transition: 0.3s;
+}
+
+.card:hover figcaption{
+    opacity: 1; /*//cared parr hover karnai sai ye text visible ho jayega */
+    transform: scale(1.03);
+}
